@@ -49,6 +49,24 @@ nav h1 {
   float: left;
 }
 
+.search-places input {
+  width: 85%;
+  padding: 5px;
+  font-size: 1.2em;
+  border: none;
+  outline: none;
+}
+
+.view-list-markers {}
+
+.marker-name {
+  cursor: pointer;
+}
+
+h3.marker-name:hover {
+  color: #fff;
+}
+
 .map {
   min-height: 600px;
   position: absolute;
