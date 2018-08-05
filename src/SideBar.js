@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
+import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 
 class SideBar extends Component {
   state = {
@@ -9,28 +10,23 @@ class SideBar extends Component {
 
   updateQuery = (query) => {
     this.setState({query})
-    this.updateMarkersPlaces()
+    this.props.onUpdateMarkers(query)
+    this.props.onchangeZoom()
   }
 
-  updateMarkersPlaces = () => {
-    console.log('update the places');
-    this.props.onUpdateMarkers()
+  choosePlace = (marker) => {
+    console.log(`marker name= ${marker.title}`);
+    this.props.onMarkerClicked(marker)
+  //  this.props.onUpdateMarkers()
   }
+
+
 
   render(){
 
     const {markers} = this.props
     const {query} = this.state
-    let showingPlaces
-
-    //Update the view list markers according to the search
-    if(query){
-      const match = new RegExp(escapeRegExp(query), 'i')
-      showingPlaces = markers.filter((marker)=> match.test(marker.title))
-    } else{
-      showingPlaces = markers
-    }
-    showingPlaces.sort(sortBy('title'))
+    markers.sort(sortBy('title'))
 
     return(
       <section className="side-bar">
@@ -39,16 +35,20 @@ class SideBar extends Component {
             type="text"
             placeholder="Search by place name"
             value={query}
-            onChange={(event)=> this.updateQuery(event.target.value)}
+            onChange={(e)=> this.updateQuery(e.target.value)}
+
           />
 
         </div>
         <div className="view-list-markers">
           <ul>
             {
-              showingPlaces.map((marker, index) => (
+              this.props.markers.map((marker, index) => (
               <li key={index}>
-                <h3 className="marker-name" onClick={this.updateMarkersPlaces}> {marker.title}</h3>
+                <h3 className="marker-name"
+                  onClick={() => {this.choosePlace(marker)}}>
+                   {marker.title}
+                </h3>
               </li>
             ))
            }

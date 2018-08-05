@@ -2,42 +2,21 @@
 import React, { Component } from 'react';
 // import GoogleMapReact from 'google-maps-react';
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
-import './App.css';
 
-const Map_Center = {lat: 52.404221, lng: 16.933459 }
+
+
 
 
 export class MapContainer extends Component {
 
-  state = {
-    zoom: 12,
-    initialCenter:Map_Center,
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {},
-    hoveredMarker:{},
-    icon:{}
-  }
-
-  onMarkerClick = (props, marker, e) => {
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true,
-      zoom: 14
-    })
-    this.props.onUpdateMarkers()
+  choosePlace = (props, marker, e) => {
+    this.props.onMarkerClicked(props, marker, e)
+    // this.props.onUpdateMarkers()
   }
 
 
-  onMapClicked = (props) => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null,
-        zoom: 12
-      })
-    }
+  clickTheMap = () => {
+    this.props.onMapClicked()
   }
 
   render(){
@@ -56,26 +35,29 @@ export class MapContainer extends Component {
     return(
           <section className="map">
             <Map google={this.props.google}
-              zoom={this.state.zoom}
+              zoom={this.props.zoom}
               style={style}
-              initialCenter={this.state.initialCenter}
-              onClick={this.onMapClicked}
+              initialCenter={this.props.center}
+              onClick={this.clickTheMap}
              >
                {
                  this.props.markers.map((marker, index) => {
                    return(<Marker key={index}
                      position={ marker.location}
                      name={marker.title}
-                     onClick={this.onMarkerClick}
+                     onClick={this.choosePlace}
+                     // animation={this.props.activeMarker.name === marker.title ? this.props.google.maps.Animation.BOUNCE : null  }
                    />)
                  })
                }
 
                <InfoWindow
-                 marker={this.state.activeMarker}
-                 visible={this.state.showingInfoWindow}>
+                 marker={this.props.activeMarker}
+                 visible={this.props.showingInfoWindow}
+                 onClose={this.props.closeingInfoWindow}>
                  <div>
-                   <h1>{this.state.selectedPlace.name}</h1>
+                   <img src={this.props.photo} alt={this.props.activeMarker.name}/>
+                   <h3>{this.props.activeMarker.name}</h3>
                  </div>
               </InfoWindow>
              </Map>
