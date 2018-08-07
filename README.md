@@ -1,18 +1,20 @@
-# NeighborhoodMap Project
+# NeighborhoodMap Project by Rasha Ali
 
 This is the final assignment project for Udacity's NanoDegree course.
+It's a single page application written in reactjs and uses Google maps APIs.
 
 ## How to run the project
 
 To get started:
 
-* install all project dependencies with `npm install`
-* To run Service worker:
+* Install all project dependencies with `npm install`
+* To run service worker:
   -  `npm run build`
   -  `npm install -g serve`
   -  `serve -s build`
-The server will start under port 5000
+The server in this case will start under port 5000
 * Or start the development server with `npm start` (No service worker)
+* Navigate to the main page and try its functions
 
 
 ## Create React App
