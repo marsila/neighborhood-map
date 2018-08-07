@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "escape-string-regexp": "^1.0.5",
+    "font-awesome": "^4.7.0",
     "google-maps-react": "^2.0.2",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-meta-tags": "^0.4.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "sort-by": "^1.2.0"

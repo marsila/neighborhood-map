@@ -1,0 +1,39 @@
+@media screen and (min-width: 320px) {
+  nav h1 {
+    font-size: 1em;
+  }
+  nav .icon {
+    font-size: 1.6em;
+  }
+  .side-bar {
+    padding: 0px;
+    margin: 0px;
+  }
+  h3.marker-name {
+    font-size: 0.9em;
+  }
+  .side-bar ul {
+    /* list-style-type: none; */
+    left: 0;
+    float: left;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  nav h1 {
+    font-size: 2em;
+  }
+  nav .icon {
+    font-size: 3em;
+  }
+  h3.marker-name {
+    font-size: 1.2em;
+  }
+  .search-places input {
+    width: 85%;
+    font-size: 1.2em;
+  }
+  footer {
+    font-size: 10pt;
+  }
+}
