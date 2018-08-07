@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import escapeRegExp from 'escape-string-regexp'
-import MapContainer from './components/MapContainer'
+import MapContainer from './MapContainer'
 import SideBar from './components/SideBar'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -34,7 +34,7 @@ const markers = [
 class NeighborhoodApp extends Component {
 
   state = {
-    showingPlaces:markers,
+    showingPlaces:[],
     zoom: 12,
     center: {lat: 52.404221, lng: 16.933459 },
     showingInfoWindow: false,
@@ -44,6 +44,10 @@ class NeighborhoodApp extends Component {
     displaySideBar:'side-bar',
     icon:{},
     error:false
+  }
+
+  componentDidMount(){
+    this.setState({showingPlaces: markers})
   }
 
   markerClicked = (props, marker, e) => {

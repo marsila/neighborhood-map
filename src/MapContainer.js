@@ -19,21 +19,6 @@ export class MapContainer extends Component {
     zoom: PropTypes.number,
     center: PropTypes.object
   }
-  state={
-    bounds:{}
-  }
-  componentDidMount(){
-    this.setMapBounds()
-  }
-
-
-  setMapBounds() {
-    let bounds = new this.props.google.maps.LatLngBounds();
-    for (let i = 0; i < this.props.markers.length; i++) {
-      bounds.extend(this.props.markers[i].location);
-    }
-    this.setState({bounds});
-  }
 
   choosePlace = (props, marker, e) => {
     this.props.onMarkerClicked(props, marker, e)

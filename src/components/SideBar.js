@@ -33,7 +33,6 @@ class SideBar extends Component {
 
     return(
       <section className={this.props.displaySideBar}>
-        {console.log(`class name = ${this.props.displaySideBar}`)}
         <div className="search-places">
           <input
             type="text"
