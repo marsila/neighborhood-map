@@ -1,15 +1,14 @@
-/* global google */
+
 import React, { Component } from 'react'
 import escapeRegExp from 'escape-string-regexp'
-// import MetaTags from 'react-meta-tags'
 import MapContainer from './components/MapContainer'
 import SideBar from './components/SideBar'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import * as FoursquareAPI from './FoursquareAPI'
 
-// import local photos that was tooken from wikibedia
-// to use them when there is an error loading photos from third-party API
+/* import local photos that was tooken from wikibedia
+ to use them when there is an error loading photos from third-party API*/
 
 import photo_StaryRynek from './img/photo_Stary Rynek.jpg'
 import photo_CytadelaPark from './img/photo_Cytadela Park.jpg'
@@ -48,28 +47,20 @@ class NeighborhoodApp extends Component {
   }
 
   markerClicked = (props, marker, e) => {
-    var keyNames = Object.keys(props);
-console.log(`keyNames= ${keyNames}`);
-console.log(`marker = ${Object.keys(marker)}`);
-    console.log(`marker clicked :: props= ${props.name}, marker= ${marker.name} , e= ${e}`);
-
     this.setState({
       activeMarker: marker,
       selectedPlace:marker.name,
       showingInfoWindow: true,
       center:marker.position
     })
-    console.log(`activeMarker= ${Object.keys(this.state.activeMarker)}`);
     //get the details from fourSquare API and set the marker info
     this.getActiveMarkerIdDetails(props)
-    // this.updateMarkers(marker.name)
   }
 
   getActiveMarkerIdDetails = (marker) => {
     FoursquareAPI.getActiveMarkerId(marker.position.lat, marker.position.lng)
     .then(markerId => {
       if(markerId){
-        console.log(`id =${markerId}`);
         this.getDetails(markerId)
       }else{
         console.log(`no id found!!!`);
@@ -80,40 +71,28 @@ console.log(`marker = ${Object.keys(marker)}`);
 
 //get info about the place using the marker Id
   getDetails =(markerId)=> {
-    console.log(`id2 =${markerId}`);
     FoursquareAPI.getMarkerDetails(markerId)
     .then((res)=> {
       if(res){
-       console.log(`res= ${Object.keys(res.response.venue)}` );
-        if('bestPhoto' in res.response.venue){
-          console.log(`ther is a photo`);
+       if('bestPhoto' in res.response.venue){
           var imgSrc = res.response.venue.bestPhoto.prefix + '150x150' +  res.response.venue.bestPhoto.suffix
           this.setState({photo : imgSrc})
         }else {
-          console.log(`no photo`);
-          this.setState({
-            photo: `photo_${this.state.activeMarker.name}.jpg`,
-            error:true
-          })
+          this.viewDefaultImage()
         }
       }else {
-        console.log(`no result!!!!`);
-        this.setState({
-          photo: `photo_${this.state.activeMarker.name}.jpg`,
-          error:true
-        })
+        this.viewDefaultImage()
       }
     }).catch((e) => {
-      this.handleEerror(e)})
+      this.viewDefaultImage()})
   }
 
  //handle place info error by using local photos instead
-  handleEerror =(e , markerId) => {
+  viewDefaultImage =( markerId) => {
     this.setState({
       photo: `photo_${this.state.activeMarker.name}.jpg`,
       error:true
-  })
-    console.log(`e =${e}`);
+    })
   }
 
   mapClicked = () => {
@@ -128,8 +107,6 @@ console.log(`marker = ${Object.keys(marker)}`);
   }
 // change places on the map and in the view list according to the search
   updateMarkers = (query)=> {
-    console.log('update the markers inside the app');
-    console.log(`the query = ${query}`);
     let showingPlaces
     if(query){
       const match = new RegExp(escapeRegExp(query), 'i')
@@ -140,12 +117,7 @@ console.log(`marker = ${Object.keys(marker)}`);
     this.setState({showingPlaces})
   }
 
-  // changeMapZoom =() => (this.setState({zoom : 12}))
-//add animation to the marker when clicking its name on the view list
   choosePlace = (markerTitle) =>{
-    console.log(`selectedPlace= ${markerTitle}`);
-    // let selectedPlace
-    // selectedPlace = markers.filter((m) => marker.title === m.title)
     this.setState({
       selectedPlace:markerTitle,
       showingInfoWindow:false
@@ -162,13 +134,10 @@ console.log(`marker = ${Object.keys(marker)}`);
   }
   //toggle the search input and view list
   toggleSideBar(displaySideBar){
-    console.log(`toggle= ${this.state.displaySideBar} `);
     if(this.state.displaySideBar === 'side-bar') {
       this.setState({displaySideBar:'side-bar open'})
-      console.log(`displaySideBar= ${this.state.displaySideBar}`)
     }  else{
       this.setState({displaySideBar:'side-bar'})
-      console.log(`displaySideBar= ${this.state.displaySideBar}`)
     }
   }
 

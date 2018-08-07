@@ -22,15 +22,3 @@ export const getActiveMarkerId = (lat, lng) =>
 export const getMarkerDetails = (markerId) =>
   fetch(`https://api.foursquare.com/v2/venues/${markerId}?client_id=${client_id}&client_secret=${client_secret}&v=${version}`)
   .then(res => res.json())
-
-
-
-  //
-  //       const getActiveMarker= (data) => {
-  //         console.log(`jason date= ${Object.keys(data.response.venues[0])}`);
-  //         let result= data.response.venues;
-  //         result.map((res) => {
-  //           console.log(`res = ${res.name}, ${res.location}, ${res.id}`);
-  //
-  //         })
-  //       }

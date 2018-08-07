@@ -1,14 +1,18 @@
 # NeighborhoodMap Project
 
-This is the final assessment project for Udacity's NanoDegree course.
-
+This is the final assignment project for Udacity's NanoDegree course.
 
 ## How to run the project
 
 To get started:
 
 * install all project dependencies with `npm install`
-* start the development server with `npm start`
+* To run Service worker:
+  -  `npm run build`
+  -  `npm install -g serve`
+  -  `serve -s build`
+The server will start under port 5000
+* Or start the development server with `npm start` (No service worker)
 
 
 ## Create React App

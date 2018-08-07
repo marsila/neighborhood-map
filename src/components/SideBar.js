@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
-import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
-// import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react'
 import PropTypes from 'prop-types'
 
 class SideBar extends Component {
@@ -22,12 +20,9 @@ class SideBar extends Component {
   }
 
   onChoosePlace = (markerTitle) => {
-    console.log(`marker name= ${markerTitle}`);
     this.setState({selectedPlace: markerTitle})
     this.props.onChoosePlace(markerTitle)
   }
-
-
 
   render(){
 
@@ -55,21 +50,18 @@ class SideBar extends Component {
               <li key={index}>
                 <h3 className="marker-name"
                   onClick={() => {
-                    // console.log(`markerSide= ${Object.keys(marker)}`);
                     this.onChoosePlace(marker.title)
                 }}>
                    {marker.title}
                 </h3>
               </li>
             ))
-           }
-
-         </ul>
-        </div>
-      </section>
-    )
-  }
-
+          }
+        </ul>
+      </div>
+    </section>
+  )
+}
 }
 
 export default SideBar;

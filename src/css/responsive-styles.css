@@ -37,3 +37,9 @@
     font-size: 10pt;
   }
 }
+
+@media screen and (min-width: 750px) {
+  .side-bar {
+    width: 30%;
+  }
+}

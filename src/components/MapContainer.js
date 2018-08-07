@@ -1,4 +1,4 @@
-/* global google */
+
 import React, { Component } from 'react';
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react'
 import PropTypes from 'prop-types'
@@ -26,8 +26,7 @@ export class MapContainer extends Component {
     this.setMapBounds()
   }
 
-  // This function will loop through the markers array
-  // and Extend the boundaries of the map for each marker and display the marker
+
   setMapBounds() {
     let bounds = new this.props.google.maps.LatLngBounds();
     for (let i = 0; i < this.props.markers.length; i++) {
@@ -38,7 +37,6 @@ export class MapContainer extends Component {
 
   choosePlace = (props, marker, e) => {
     this.props.onMarkerClicked(props, marker, e)
-    // this.props.onUpdateMarkers()
   }
 
   clickTheMap = () => {
@@ -63,8 +61,6 @@ export class MapContainer extends Component {
     const defaultIcon = this.createMarkerIcon('225a8e');
     const highlightedIcon = this.createMarkerIcon('ad057c');
     const imageName= './img/' +this.props.photo;
-    // const map = this.props.google.map;
-
 
     return(
           <section className="map" aria-label="Neighborhood google map">
@@ -85,8 +81,6 @@ export class MapContainer extends Component {
                      onClick={this.choosePlace}
                      animation={(this.props.selectedPlace === marker.title) && this.props.google.maps.Animation.BOUNCE}
                      icon={this.props.selectedPlace === marker.title ? highlightedIcon : defaultIcon}
-                     // { url: 'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|FFFF24|40|_|%E2%80%A2', scaledSize: new this.props.google.maps.Size(21, 34)}
-
                    />)
                  })
                }
@@ -109,4 +103,5 @@ export class MapContainer extends Component {
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyDqRj6EWf5JU1UO-nQME_tLjWL12uOmFyc'
+  // apiKey:'AIzaSyAJP082u57ioi_x09Rt6dwQ9QGMtVpEm7o'
 })(MapContainer)

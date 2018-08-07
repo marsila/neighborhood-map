@@ -28,7 +28,7 @@ nav h1 {
 nav h1 {
   color: #fff;
   position: relative;
-  font-size: 0.9em;
+  font-size: 14px;
   font-weight: 800;
   text-align: center;
   vertical-align: middle;
@@ -69,7 +69,7 @@ nav .icon {
   padding: 10px 10px 30px 10px;
   text-align: left;
   z-index: 10;
-  width: 30%;
+  width: 45%;
   float: left;
   position: absolute;
   -webkit-transform: translate(-9999px, 0);
@@ -86,7 +86,8 @@ nav .icon {
 .search-places input {
   width: 90%;
   padding: 5px;
-  font-size: 0.9em;
+  font-size: 12px;
+  height: 25px;
   border: none;
   outline: none;
 }
@@ -100,7 +101,7 @@ nav .icon {
 }
 
 h3.marker-name {
-  font-size: 0.7em;
+  font-size: 12px;
 }
 
 h3.marker-name:hover {
@@ -118,7 +119,7 @@ h3.marker-name:hover {
 footer {
   background-color: #252831;
   color: #fff;
-  font-size: 8pt;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 1px;
   padding: 25px;
@@ -131,5 +132,5 @@ footer .copyright {
 }
 
 footer span {
-  color: #ad057c;
+  color: #f3a5dc;
 }

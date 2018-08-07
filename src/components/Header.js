@@ -10,7 +10,7 @@ function Header(props) {
 
   return(
     <header>
-      <nav tabIndex= '13'>
+      <nav tabIndex= '-13'>
         <h1>My Neighborhood Map</h1>
         <i className="fa fa-bars icon"
         onClick={() =>{props.onToggleSideBar(displaySideBar)}}
