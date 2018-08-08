@@ -1,21 +1,12 @@
 
 import React, { Component } from 'react'
 import escapeRegExp from 'escape-string-regexp'
-import MapContainer from './MapContainer'
+import MapContainer from './components/MapContainer'
 import SideBar from './components/SideBar'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import * as FoursquareAPI from './FoursquareAPI'
 
-/* import local photos that was tooken from wikibedia
- to use them when there is an error loading photos from third-party API*/
-
-import photo_StaryRynek from './img/photo_Stary Rynek.jpg'
-import photo_CytadelaPark from './img/photo_Cytadela Park.jpg'
-import photo_PolitechnikaPoznanska from './img/photo_Politechnika Poznanska.jpg'
-import photo_PosnaniaMall from './img/photo_Posnania Mall.jpg'
-import photo_TermyMaltańskie from './img/photo_Termy Maltańskie.jpg'
-import photo_NoweZoo from './img/photo_Nowe Zoo.jpg'
 
 import './css/App.css'
 import './css/responsive-styles.css'
@@ -32,7 +23,6 @@ const markers = [
 ]
 
 class NeighborhoodApp extends Component {
-
   state = {
     showingPlaces:[],
     zoom: 12,
@@ -70,7 +60,7 @@ class NeighborhoodApp extends Component {
         console.log(`no id found!!!`);
       }
     })
-    .catch(e => this.handleEerror(e))
+    .catch(e => this.viewDefaultImage())
   }
 
 //get info about the place using the marker Id
@@ -87,7 +77,7 @@ class NeighborhoodApp extends Component {
       }else {
         this.viewDefaultImage()
       }
-    }).catch((e) => {
+    }).catch(e => {
       this.viewDefaultImage()})
   }
 
@@ -132,8 +122,8 @@ class NeighborhoodApp extends Component {
     this.setState({
       showingPlaces:markers,
       showingInfoWindow:false,
-      activeMarker:{},
-      photo:''
+      activeMarker:{}
+
     })
   }
   //toggle the search input and view list

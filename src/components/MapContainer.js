@@ -3,6 +3,17 @@ import React, { Component } from 'react';
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react'
 import PropTypes from 'prop-types'
 
+/* import local photos that was tooken from wikibedia
+ to use them when there is an error loading photos from third-party API*/
+import photo_StaryRynek from './img/photo_Stary Rynek.jpg'
+import photo_CytadelaPark from './img/photo_Cytadela Park.jpg'
+import photo_PolitechnikaPoznanska from './img/photo_Politechnika Poznanska.jpg'
+import photo_PosnaniaMall from './img/photo_Posnania Mall.jpg'
+import photo_TermyMaltańskie from './img/photo_Termy Maltańskie.jpg'
+import photo_NoweZoo from './img/photo_Nowe Zoo.jpg'
+
+
+
 
 export class MapContainer extends Component {
 
@@ -28,23 +39,19 @@ export class MapContainer extends Component {
     this.props.onMapClicked()
   }
 
-  createMarkerIcon(iconColor) {
-    let markerImage = new this.props.google.maps.MarkerImage(
-      'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ iconColor +'|40|_|%E2%80%A2',
-      new this.props.google.maps.Size(21, 34),
-      new this.props.google.maps.Point(0, 0),
-      new this.props.google.maps.Point(10, 34),
-      new this.props.google.maps.Size(21,34));
-    return markerImage;
-  }
-
   render(){
     const style = {
     width: '100%',
     height: '100%'
     }
-    const defaultIcon = this.createMarkerIcon('225a8e');
-    const highlightedIcon = this.createMarkerIcon('ad057c');
+    const defaultIcon = {
+      url:'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|225a8e|40|_|%E2%80%A2',
+      scaledSize:new this.props.google.maps.Size(21, 34)
+    }
+    const highlightedIcon = {
+      url:'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|ad057c|40|_|%E2%80%A2',
+      scaledSize: new this.props.google.maps.Size(21, 34)
+    }
     const imageName= './img/' +this.props.photo;
 
     return(

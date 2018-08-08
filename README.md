@@ -1,7 +1,8 @@
 # NeighborhoodMap Project by Rasha Ali
 
 This is the final assignment project for Udacity's NanoDegree course.
-It's a single page application written in reactjs and uses Google maps APIs.
+It's a single page application written in reactjs.
+This app uses Google maps APIs, and Foursquare APIs to fetch data about defined places on google map.
 
 ## How to run the project
 
