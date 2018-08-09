@@ -36,6 +36,7 @@ class SideBar extends Component {
         <div className="search-places">
           <input
             type="text"
+            aria-label="Search by place name"
             placeholder="Search by place name"
             value={query}
             onChange={(e)=> this.updateQuery(e.target.value)}
@@ -46,13 +47,15 @@ class SideBar extends Component {
           <ul>
             {
               this.props.markers.map((marker, index) => (
-              <li key={index}>
-                <h3 className="marker-name"
+              <li key={index} tabIndex ='0'>
+                <a className="marker-name"
+                  aria-label={marker.title}
                   onClick={() => {
                     this.onChoosePlace(marker.title)
-                }}>
+                  }}
+                >
                    {marker.title}
-                </h3>
+                </a>
               </li>
             ))
           }

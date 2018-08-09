@@ -23,6 +23,7 @@ const markers = [
 ]
 
 class NeighborhoodApp extends Component {
+
   state = {
     showingPlaces:[],
     zoom: 12,
@@ -35,6 +36,7 @@ class NeighborhoodApp extends Component {
     icon:{},
     error:false
   }
+
 
   componentDidMount(){
     this.setState({showingPlaces: markers})
@@ -174,6 +176,7 @@ class NeighborhoodApp extends Component {
       </div>
     );
   }
+  
 }
 
 export default NeighborhoodApp;

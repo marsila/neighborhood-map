@@ -9,7 +9,7 @@
     padding: 0px;
     margin: 0px;
   }
-  h3.marker-name {
+  a.marker-name {
     font-size: 0.9em;
   }
   .side-bar ul {
@@ -26,7 +26,7 @@
   nav .icon {
     font-size: 3em;
   }
-  h3.marker-name {
+  a.marker-name {
     font-size: 1.2em;
   }
   .search-places input {

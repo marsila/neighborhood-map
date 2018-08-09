@@ -5,20 +5,19 @@ const version = "20180323"
 const radius = 250
 const search_limit = 1
 
-
+//I handled API errors by providing local photos for the defined places on the map
 export const getActiveMarker = (lat, lng) =>
   fetch(`https://api.foursquare.com/v2/venues/search?ll=${lat},${lng}&limit=${search_limit}&radius=${radius}
     	&client_id=${client_id}&client_secret=${client_secret}&v=${version}`)
   .then(res =>  res.json())
   .then(data => data.response.venues[0])
-  .catch(e => console.log(`error: ${e}`))
+  .catch(e => alert(`Opsss!! FoursquareAPI error: ${e}`))
 
 export const getActiveMarkerId = (lat, lng) =>
   fetch(`https://api.foursquare.com/v2/venues/search?ll=${lat},${lng}&limit=${search_limit}&radius=${radius}
       &client_id=${client_id}&client_secret=${client_secret}&v=${version}`)
   .then(res =>  res.json())
   .then(res => res.response.venues[0].id)
-
 export const getMarkerDetails = (markerId) =>
   fetch(`https://api.foursquare.com/v2/venues/${markerId}?client_id=${client_id}&client_secret=${client_secret}&v=${version}`)
   .then(res => res.json())

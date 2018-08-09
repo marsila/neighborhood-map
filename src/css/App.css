@@ -42,6 +42,7 @@ nav .icon {
   font-size: 1.5em;
   float: left;
   color: #fff;
+  background-color: #444;
   position: absolute;
   vertical-align: middle;
   top: 15px;
@@ -92,20 +93,23 @@ nav .icon {
   outline: none;
 }
 
-.view-list-markers {}
-
 .marker-name {
   cursor: pointer;
   left: 0px;
   position: relative;
 }
 
-h3.marker-name {
+a.marker-name {
   font-size: 12px;
+  font-weight: 600;
 }
 
-h3.marker-name:hover {
+a.marker-name:hover {
   color: #fff;
+}
+
+.view-list-markers ul li :focus {
+  background-color: #f3a5dc;
 }
 
 .map {
