@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import escapeRegExp from 'escape-string-regexp'
 import MapContainer from './components/MapContainer'
@@ -32,6 +31,7 @@ class NeighborhoodApp extends Component {
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: '',
+    markerTitle:'',
     photo:'',
     displaySideBar:'side-bar',
     icon:{},
@@ -46,13 +46,14 @@ class NeighborhoodApp extends Component {
   markerClicked = (props, marker, e) => {
     this.setState({
       activeMarker: marker,
-      selectedPlace:marker.name,
       showingInfoWindow: true,
+      markerTitle:marker.name,
       center:marker.position
     })
     //get the details from fourSquare API and set the marker info
     this.getActiveMarkerIdDetails(props)
   }
+
 
   getActiveMarkerIdDetails = (marker) => {
     FoursquareAPI.getActiveMarkerId(marker.position.lat, marker.position.lng)
@@ -93,12 +94,13 @@ class NeighborhoodApp extends Component {
   }
 
   mapClicked = () => {
-    if (this.state.showingInfoWindow || this.state.selectedPlace!=='') {
+    if (this.state.showingInfoWindow || this.state.selectedPlace!=='' || this.state.markerTitle !== '') {
       this.setState({
         showingPlaces:markers,
         showingInfoWindow: false,
         activeMarker: {},
-        selectedPlace:''
+        selectedPlace:'',
+        markerTitle:''
       })
     }
   }
@@ -114,10 +116,25 @@ class NeighborhoodApp extends Component {
     this.setState({showingPlaces})
   }
 
-  choosePlace = (markerTitle) =>{
+  choosePlace = (marker) =>{
     this.setState({
-      selectedPlace:markerTitle,
-      showingInfoWindow:false
+      selectedPlace:marker.title,
+      markerTitle:marker.title
+    })
+  }
+
+  openItemListMarker = (marker)=> {
+    this.setState({
+      activeMarker : marker,
+      showingInfoWindow :true,
+      center:marker.position
+    })
+    this.getActiveMarkerIdDetails(marker)
+  }
+
+  clearPlace = () =>{
+    this.setState({
+      selectedPlace:''
     })
   }
 
@@ -125,8 +142,8 @@ class NeighborhoodApp extends Component {
     this.setState({
       showingPlaces:markers,
       showingInfoWindow:false,
-      activeMarker:{}
-
+      activeMarker:{},
+      markerTitle:''
     })
   }
   //toggle the search input and view list
@@ -152,8 +169,8 @@ class NeighborhoodApp extends Component {
             onUpdateMarkers={(query) => {
               this.updateMarkers(query)
             }}
-            onChoosePlace={(markerTitle) => {
-              this.choosePlace(markerTitle)
+            onChoosePlace={(marker) => {
+              this.choosePlace(marker)
             }}
             {...this.state}
           />
@@ -170,9 +187,11 @@ class NeighborhoodApp extends Component {
             getActiveMarkerIdDetails={this.getActiveMarkerIdDetails}
             closeingInfoWindow ={this.closeingInfoWindow}
             placeSelected={this.state.selectedPlace}
+            openItemListMarker={this.openItemListMarker}
+            clearPlace= {this.clearPlace}
             {...this.state}
           />
-        
+
         </main>
         <Footer/>
       </div>

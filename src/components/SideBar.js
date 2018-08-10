@@ -19,13 +19,12 @@ class SideBar extends Component {
     this.props.onUpdateMarkers(query)
   }
 
-  onChoosePlace = (markerTitle) => {
-    this.setState({selectedPlace: markerTitle})
-    this.props.onChoosePlace(markerTitle)
+  onChoosePlace = (marker) => {
+    this.setState({selectedPlace: marker.title})
+    this.props.onChoosePlace(marker)
   }
 
-  render(){
-
+  render(){ 
     const {markers} = this.props
     const {query} = this.state
 
@@ -50,7 +49,7 @@ class SideBar extends Component {
                 <button className="marker-name"
                   aria-label={marker.title}
                   onClick={() => {
-                    this.onChoosePlace(marker.title)
+                    this.onChoosePlace(marker)
                   }}
                 >
                    {marker.title}

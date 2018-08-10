@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react'
 import PropTypes from 'prop-types'
@@ -12,9 +11,6 @@ import photo_PolitechnikaPoznanska from './img/photo_Politechnika Poznanska.jpg'
 import photo_PosnaniaMall from './img/photo_Posnania Mall.jpg'
 import photo_TermyMaltańskie from './img/photo_Termy Maltańskie.jpg'
 import photo_NoweZoo from './img/photo_Nowe Zoo.jpg'
-
-
-
 
 export class MapContainer extends Component {
 
@@ -32,12 +28,28 @@ export class MapContainer extends Component {
     center: PropTypes.object
   }
 
+
   choosePlace = (props, marker, e) => {
     this.props.onMarkerClicked(props, marker, e)
   }
 
   clickTheMap = () => {
     this.props.onMapClicked()
+  }
+
+  getSnapshotBeforeUpdate(){
+  //when the place is selected the marker infowindow will open
+    let  activeMarker
+    if(this.props.selectedPlace !== ''){
+      activeMarker=this.refs[this.props.selectedPlace].marker
+      this.props.openItemListMarker(activeMarker)
+      this.props.clearPlace()
+    }
+    return null;
+  }
+
+  componentDidUpdate(){
+    return null;
   }
 
   render(){
@@ -53,7 +65,7 @@ export class MapContainer extends Component {
       url:'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|ad057c|40|_|%E2%80%A2',
       scaledSize: new this.props.google.maps.Size(21, 34)
     }
-    const imageName= './img/' +this.props.photo;
+    const imageName = './img/' +this.props.photo
 
 
     return(
@@ -61,7 +73,6 @@ export class MapContainer extends Component {
 
             <Map google={this.props.google}
               // googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJP082u57ioi_x09Rt6dwQ9QGMtVpEm7o&v=3"
-
               zoom={this.props.zoom}
               style={style}
               role={'application'}
@@ -75,11 +86,13 @@ export class MapContainer extends Component {
                    return(<Marker key={index}
                      position={ marker.location}
                      name={marker.title}
+                     ref={marker.title}
                      title={marker.title}
                      onClick={this.choosePlace}
-                     animation={(this.props.selectedPlace === marker.title) && this.props.google.maps.Animation.BOUNCE}
-                     icon={this.props.selectedPlace === marker.title ? highlightedIcon : defaultIcon}
+                     animation={(this.props.markerTitle === marker.title) && this.props.google.maps.Animation.BOUNCE}
+                     icon={this.props.markerTitle === marker.title ? highlightedIcon : defaultIcon}
                    />)
+                  this.state.markersArray.push(marker)
                  })
                }
 
