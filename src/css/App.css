@@ -97,19 +97,18 @@ nav .icon {
   cursor: pointer;
   left: 0px;
   position: relative;
+  background-color: #444;
+  border: 0px solid #444;
+  color: #c6c6c6;
 }
 
-a.marker-name {
+.marker-name {
   font-size: 12px;
   font-weight: 600;
 }
 
-a.marker-name:hover {
+.marker-name:hover {
   color: #fff;
-}
-
-.view-list-markers ul li :focus {
-  background-color: #f3a5dc;
 }
 
 .map {

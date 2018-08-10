@@ -8,6 +8,7 @@ import Footer from './components/Footer'
 import * as FoursquareAPI from './FoursquareAPI'
 
 
+
 import './css/App.css'
 import './css/responsive-styles.css'
 import '../node_modules/font-awesome/css/font-awesome.min.css'
@@ -145,7 +146,7 @@ class NeighborhoodApp extends Component {
         />
         <main className="main-content">
           <SideBar
-            tabIndex='12'
+            tabIndex='0'
             markers={this.state.showingPlaces}
             onchangeZoom={this.changeMapZoom}
             onUpdateMarkers={(query) => {
@@ -171,12 +172,13 @@ class NeighborhoodApp extends Component {
             placeSelected={this.state.selectedPlace}
             {...this.state}
           />
+        
         </main>
         <Footer/>
       </div>
     );
   }
-  
+
 }
 
 export default NeighborhoodApp;

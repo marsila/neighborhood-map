@@ -13,7 +13,6 @@ function Header(props) {
       <nav>
         <h1>My Neighborhood Map</h1>
         <button tabIndex= '0'
-          role='button'
           aria-label='menu'
           aria-expanded="true"
           className="fa fa-bars icon"

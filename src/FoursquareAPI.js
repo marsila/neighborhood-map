@@ -18,6 +18,16 @@ export const getActiveMarkerId = (lat, lng) =>
       &client_id=${client_id}&client_secret=${client_secret}&v=${version}`)
   .then(res =>  res.json())
   .then(res => res.response.venues[0].id)
+  .catch(e => {
+      alert(`Opsss!! Foursquare API error!. We will present you static photos`);
+      throw e;
+    })
+
+
 export const getMarkerDetails = (markerId) =>
   fetch(`https://api.foursquare.com/v2/venues/${markerId}?client_id=${client_id}&client_secret=${client_secret}&v=${version}`)
   .then(res => res.json())
+  .catch(e => {
+      alert(`Opsss!! Foursquare API error!. We will present you static photos`);
+      throw e;
+    })

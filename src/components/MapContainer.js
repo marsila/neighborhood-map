@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react'
 import PropTypes from 'prop-types'
 
+
 /* import local photos that was tooken from wikibedia
  to use them when there is an error loading photos from third-party API*/
 import photo_StaryRynek from './img/photo_Stary Rynek.jpg'
@@ -54,9 +55,13 @@ export class MapContainer extends Component {
     }
     const imageName= './img/' +this.props.photo;
 
+
     return(
           <section className="map" aria-label="Neighborhood google map">
+
             <Map google={this.props.google}
+              // googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJP082u57ioi_x09Rt6dwQ9QGMtVpEm7o&v=3"
+
               zoom={this.props.zoom}
               style={style}
               role={'application'}
@@ -64,6 +69,7 @@ export class MapContainer extends Component {
               initialCenter={this.props.center}
               onClick={this.clickTheMap}
              >
+
                {
                  this.props.markers.map((marker, index) => {
                    return(<Marker key={index}
@@ -87,13 +93,19 @@ export class MapContainer extends Component {
                  </div>
               </InfoWindow>
              </Map>
+
            </section>
 
     )
+
   }
 }
 
+
+// const Loading = () => <div>Fancy loading container</div>;
+
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyDqRj6EWf5JU1UO-nQME_tLjWL12uOmFyc',
+  // LoadingContainer: Loading
   // apiKey:'AIzaSyAJP082u57ioi_x09Rt6dwQ9QGMtVpEm7o'
 })(MapContainer)
