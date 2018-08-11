@@ -72,7 +72,7 @@ class NeighborhoodApp extends Component {
     FoursquareAPI.getMarkerDetails(markerId)
     .then((res)=> {
       if(res){
-       if('bestPhoto' in res.response.venue){
+        if('bestPhoto' in res.response.venue){
           var imgSrc = res.response.venue.bestPhoto.prefix + '150x150' +  res.response.venue.bestPhoto.suffix
           this.setState({photo : imgSrc})
         }else {
@@ -81,8 +81,7 @@ class NeighborhoodApp extends Component {
       }else {
         this.viewDefaultImage()
       }
-    }).catch(e => {
-      this.viewDefaultImage()})
+    }).catch(e => this.viewDefaultImage())
   }
 
  //handle place info error by using local photos instead
@@ -123,13 +122,42 @@ class NeighborhoodApp extends Component {
     })
   }
 
+  getPositionLat = (position)=>{
+    position = position+""
+    let lat =''
+    let seperator = position.indexOf(',' )
+    lat = position.slice(1,seperator)
+    return lat
+  }
+
+  getPositionLng =(position)=>{
+    position = position+""
+    let lng= ''
+    let seperator = position.indexOf(',')
+    lng = position.slice(seperator+2,-1)
+    return lng
+  }
+
   openItemListMarker = (marker)=> {
+    let lat = this.getPositionLat(marker.position)
+    let lng = this.getPositionLng(marker.position)
     this.setState({
       activeMarker : marker,
       showingInfoWindow :true,
       center:marker.position
     })
-    this.getActiveMarkerIdDetails(marker)
+    this.getPlaceIdDetails(lat, lng)
+  }
+  getPlaceIdDetails = (lat, lng) => {
+    FoursquareAPI.getActiveMarkerId(lat, lng)
+    .then(markerId => {
+      if(markerId){
+        this.getDetails(markerId)
+      }else{
+        console.log(`no id found!!!`);
+      }
+    })
+    .catch(e => this.viewDefaultImage())
   }
 
   clearPlace = () =>{
@@ -156,6 +184,7 @@ class NeighborhoodApp extends Component {
   }
 
   render() {
+
     return (
       <div className="App">
         <Header
@@ -197,7 +226,6 @@ class NeighborhoodApp extends Component {
       </div>
     );
   }
-
 }
 
 export default NeighborhoodApp;

@@ -20,6 +20,7 @@ export const getActiveMarkerId = (lat, lng) =>
   .then(res => res.response.venues[0].id)
   .catch(e => {
       alert(`Opsss!! Foursquare API error!. We will present you static photos`);
+      //To be catched on getDetails function and display local images
       throw e;
     })
 

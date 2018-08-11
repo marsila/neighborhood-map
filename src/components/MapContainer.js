@@ -29,6 +29,7 @@ export class MapContainer extends Component {
   }
 
 
+
   choosePlace = (props, marker, e) => {
     this.props.onMarkerClicked(props, marker, e)
   }
@@ -67,12 +68,10 @@ export class MapContainer extends Component {
     }
     const imageName = './img/' +this.props.photo
 
-
     return(
           <section className="map" aria-label="Neighborhood google map">
 
             <Map google={this.props.google}
-              // googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJP082u57ioi_x09Rt6dwQ9QGMtVpEm7o&v=3"
               zoom={this.props.zoom}
               style={style}
               role={'application'}
@@ -114,11 +113,32 @@ export class MapContainer extends Component {
   }
 }
 
+let wait=true;
+  const Loading = () => {
+    if (wait) {
+      wait=false;
+      const result = () =>{
+        setTimeout(() => {
+          if (window.google && window.google.maps) {
+            console.log('Google Maps API Loaded.');
+          } else {
+          alert('You encountered an error while retrieving google map!');
+          }
+        }, 4000);
+      }
 
-// const Loading = () => <div>Fancy loading container</div>;
+      return (
+        <div >
+          {result()}
+        </div>
+      )
+    } else{
+      return(<h4>Loading...</h4>)
+    }
+
+}
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyDqRj6EWf5JU1UO-nQME_tLjWL12uOmFyc',
-  // LoadingContainer: Loading
-  // apiKey:'AIzaSyAJP082u57ioi_x09Rt6dwQ9QGMtVpEm7o'
+  LoadingContainer: Loading
 })(MapContainer)
